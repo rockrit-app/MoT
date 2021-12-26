@@ -15,8 +15,17 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+<script>
+import Amplify from 'aws-amplify';
+import "@aws-amplify/ui-react/styles.css";
+import {AmplifyProvider} from "@aws-amplify/ui-react";
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+import { Ampligram } from './ui-components';
+</script>
     </head>
     <body id="page-top">
+<AmplifyProvider>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
@@ -349,5 +358,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+</AmplifyProvider>
     </body>
 </html>
