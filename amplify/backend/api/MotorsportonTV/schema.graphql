@@ -1,0 +1,35 @@
+type Session @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  date: AWSDate
+  time: AWSTime
+  eventID: ID @index(name: "byEvent")
+  Broadcasters: [Broadcaster] @manyToMany(relationName: "SessionBroadcaster")
+}
+
+type Championship @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Session: [Event] @hasMany(indexName: "byChampionship", fields: ["id"])
+}
+
+type Event @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  championshipID: ID @index(name: "byChampionship")
+  Sessions: [Session] @hasMany(indexName: "byEvent", fields: ["id"])
+}
+
+type Broadcaster @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  countryID: ID @index(name: "byCountry")
+  sessions: [Session] @manyToMany(relationName: "SessionBroadcaster")
+}
+
+type Country @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Broadcasters: [Broadcaster] @hasMany(indexName: "byCountry", fields: ["id"])
+}
+ 
